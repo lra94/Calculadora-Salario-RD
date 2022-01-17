@@ -4,11 +4,12 @@ const inputCalcular =document.getElementById('salario')
 const pSFS = 0.0304
 const pAFP = 0.0287
 let isr = 0
-//const isr = ()=>{}
-const c = console.log
-
 const meses = 12
 let salarioAnual
+
+const c = console.log
+
+
 
 //Funcion Calculo ISR segun DGI actualizado en fecha Enero/17/2022...
 const calcularISR = (sAnual) =>{
@@ -38,6 +39,7 @@ const calcularISR = (sAnual) =>{
         isr = Math.round(((x * 0.25) + 79776.00 )/ 12)
         c(`ISR = ${isr}`) 
     }
+    return isr
 }
 
 //Funcion calculo SFS...
@@ -48,6 +50,7 @@ const calcularSFS = (sMensual) =>{
     }else{
         c(`SFS ${4742.40}`)
     }
+    return sfs
 }
 
 //Funcion calculo AFP...
@@ -58,17 +61,35 @@ const calcularAFP = (sMensual) =>{
     }else{
         c(`AFP ${8954.40}`)
     }
+    return afp
 }
 
+//Funcion Calculo Total Retenciopnes...
+const calcularTotalRet = ()=>{
+    let ttRet = calcularAFP(Number(inputCalcular.value)) + calcularSFS(Number(inputCalcular.value)) + calcularISR(salarioAnual)
+    c(`Total retenciones : ${ttRet}`)
+    
+    return ttRet
+}
+//Funcion Calculo Salario Neto Mensual...
+const calcularSNetoMensual = (salarioMensual) =>{
+    let ttSalarioNetoMensual = salarioMensual - calcularTotalRet()
+    c(`Salario Neto Mensual ${ttSalarioNetoMensual}`)
+    return ttSalarioNetoMensual
+}
+//Funcion Calculo Salario Neto Quincenal...
+const calcularSNetoQuincenal = (salarioMensual) =>{
+    let ttsNetoQuincenal = calcularSNetoMensual(salarioMensual) / 2
+    c(`Salario Neto Quincenal ${ttsNetoQuincenal}`)
+    return ttsNetoQuincenal
+}
 
 
 btnCalcular.addEventListener('click',(e) => {
 
     salarioAnual = Number(inputCalcular.value) * meses
     c(`Salario mensual: ${inputCalcular.value} Salario anual: ${salarioAnual}`)
-    calcularISR(salarioAnual)
-    calcularSFS(Number(inputCalcular.value))
-    calcularAFP(Number(inputCalcular.value))
+    calcularSNetoQuincenal(Number(inputCalcular.value))
 
    e.preventDefault()
 
