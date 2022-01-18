@@ -13,8 +13,7 @@ const fragment = document.createDocumentFragment()
 
 const c = console.log
 
-c(template)
-
+  //c(template)
 
 //Funcion Calculo ISR segun DGI actualizado en fecha Enero/17/2022...
 const calcularISR = (sAnual) =>{
@@ -93,7 +92,6 @@ btnCalcular.addEventListener('click',(e) => {
     template.querySelector('#ttr').textContent = `Total Retenciones: RD$${calcularTotalRet().toFixed(2)}`
     template.querySelector('#snm').textContent = `Salario Neto Mensual: RD$${calcularSNetoMensual(Number(inputCalcular.value)).toFixed(2)}`
     template.querySelector('#snq').textContent = `Salario Neto Quincenal: RD$${calcularSNetoQuincenal(Number(inputCalcular.value)).toFixed(2)}`
-
     
     const clone = template.cloneNode(true)
     fragment.appendChild(clone)

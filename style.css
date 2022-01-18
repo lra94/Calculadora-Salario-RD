@@ -1,0 +1,9 @@
+.calculos{
+    margin: auto;
+    padding: auto;
+    background: rgba(25, 119, 8, 0.493);
+    align-items: center;
+    width: 35%;
+    height: 10%;
+    border-radius: 3px;
+}
