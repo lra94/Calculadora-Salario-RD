@@ -20,7 +20,6 @@ c(template)
 const calcularISR = (sAnual) =>{
     if (sAnual <= 416220.00) {
         isr = 0.00
-        c(`ISR = ${isr}`) 
     }
 
     if (sAnual >= 416220.01 && sAnual <= 624329.00) {
@@ -28,21 +27,18 @@ const calcularISR = (sAnual) =>{
       //  c(`X es: ${x}`)
         let sfs = (sMensual * pSFS)
         isr = Math.round((x * 0.15) / 12) 
-        c(`ISR = ${isr}`) 
     }
 
     if (sAnual >= 624329.01 && sAnual <= 867123.00) {
         let x = sAnual - 624329.01
         //c(`X es: ${x}`)
         isr = Math.round(((x * 0.20) + 31216.00 )/ 12)
-        c(`ISR = ${isr}`) 
     }
 
     if (sAnual >= 867123.01) {
         let x = sAnual - 867123.01
         //c(`X es: ${x}`)
         isr = Math.round(((x * 0.25) + 79776.00 )/ 12)
-        c(`ISR = ${isr}`) 
     }
     return isr
 }
@@ -50,10 +46,8 @@ const calcularISR = (sAnual) =>{
 //Funcion calculo SFS...
 const calcularSFS = (sMensual) =>{
     let sfs = sMensual * pSFS
-    if (sfs < 4742.41) {
-        c(`SFS ${sfs}`)
-    }else{
-        c(`SFS ${4742.40}`)
+    if (sfs > 4742.41) {
+        sfs = 4742.40
     }
     return sfs
 }
@@ -61,10 +55,8 @@ const calcularSFS = (sMensual) =>{
 //Funcion calculo AFP...
 const calcularAFP = (sMensual) =>{
     let afp = sMensual * pAFP
-    if (afp < 8954.40) {
-        c(`AFP ${afp}`)
-    }else{
-        c(`AFP ${8954.40}`)
+    if (afp > 8954.40) {
+        afp = 8954.40
     }
     return afp
 }
@@ -90,25 +82,26 @@ const calcularSNetoQuincenal = (salarioMensual) =>{
 
 btnCalcular.addEventListener('click',(e) => {
 
+    
     salarioAnual = Number(inputCalcular.value) * meses
    // c(`Salario mensual: ${inputCalcular.value} Salario anual: ${salarioAnual}`)
    // calcularSNetoQuincenal(Number(inputCalcular.value))
 
-    template.querySelector('#sfs').textContent = `Seguro Familiar de Salud (SFS): ${calcularSFS(Number(inputCalcular.value))}` 
-    template.querySelector('#afp').textContent = `Administradora de Fondo de Pensiones (AFP): ${calcularAFP(Number(inputCalcular.value))}`
-    template.querySelector('#isr').textContent = `Impuesto Sobre la Renta (ISR): ${calcularISR(salarioAnual)}`
-    template.querySelector('#ttr').textContent = `Total Retenciones: ${calcularTotalRet()}`
-    template.querySelector('#snm').textContent = `Salario Neto Mensual: ${calcularSNetoMensual(Number(inputCalcular.value))}`
-    template.querySelector('#snq').textContent = `Salario Neto Quincenal:${calcularSNetoQuincenal(Number(inputCalcular.value))}`
+    template.querySelector('#sfs').textContent = `Seguro Familiar de Salud (SFS): RD$${calcularSFS(Number(inputCalcular.value)).toFixed(2)}` 
+    template.querySelector('#afp').textContent = `Administradora de Fondo de Pensiones (AFP): RD$${calcularAFP(Number(inputCalcular.value)).toFixed(2)}`
+    template.querySelector('#isr').textContent = `Impuesto Sobre la Renta (ISR): RD$${calcularISR(salarioAnual).toFixed(2)}`
+    template.querySelector('#ttr').textContent = `Total Retenciones: RD$${calcularTotalRet().toFixed(2)}`
+    template.querySelector('#snm').textContent = `Salario Neto Mensual: RD$${calcularSNetoMensual(Number(inputCalcular.value)).toFixed(2)}`
+    template.querySelector('#snq').textContent = `Salario Neto Quincenal: RD$${calcularSNetoQuincenal(Number(inputCalcular.value)).toFixed(2)}`
 
-
+    
     const clone = template.cloneNode(true)
     fragment.appendChild(clone)
 
     divTemplate.appendChild(fragment)
-
-   e.preventDefault()
-
+    btnCalcular.disabled = true
+    e.preventDefault()
+   
 })
 
 
