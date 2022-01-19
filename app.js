@@ -24,7 +24,6 @@ const calcularISR = (sAnual) =>{
     if (sAnual >= 416220.01 && sAnual <= 624329.00) {
         let x = sAnual - 416220.01
       //  c(`X es: ${x}`)
-        let sfs = (sMensual * pSFS)
         isr = Math.round((x * 0.15) / 12) 
     }
 
@@ -81,25 +80,30 @@ const calcularSNetoQuincenal = (salarioMensual) =>{
 
 btnCalcular.addEventListener('click',(e) => {
 
-    
     salarioAnual = Number(inputCalcular.value) * meses
    // c(`Salario mensual: ${inputCalcular.value} Salario anual: ${salarioAnual}`)
    // calcularSNetoQuincenal(Number(inputCalcular.value))
-
-    template.querySelector('#sfs').textContent = `Seguro Familiar de Salud (SFS): RD$${calcularSFS(Number(inputCalcular.value)).toFixed(2)}` 
-    template.querySelector('#afp').textContent = `Administradora de Fondo de Pensiones (AFP): RD$${calcularAFP(Number(inputCalcular.value)).toFixed(2)}`
-    template.querySelector('#isr').textContent = `Impuesto Sobre la Renta (ISR): RD$${calcularISR(salarioAnual).toFixed(2)}`
-    template.querySelector('#ttr').textContent = `Total Retenciones: RD$${calcularTotalRet().toFixed(2)}`
-    template.querySelector('#snm').textContent = `Salario Neto Mensual: RD$${calcularSNetoMensual(Number(inputCalcular.value)).toFixed(2)}`
-    template.querySelector('#snq').textContent = `Salario Neto Quincenal: RD$${calcularSNetoQuincenal(Number(inputCalcular.value)).toFixed(2)}`
-    
+   
+   if(Number(inputCalcular.value) > 0){
+        template.querySelector('#sfs').textContent = `Seguro Familiar de Salud (SFS): RD$${calcularSFS(Number(inputCalcular.value)).toFixed(2)}` 
+        template.querySelector('#afp').textContent = `Administradora de Fondo de Pensiones (AFP): RD$${calcularAFP(Number(inputCalcular.value)).toFixed(2)}`
+        template.querySelector('#isr').textContent = `Impuesto Sobre la Renta (ISR): RD$${calcularISR(salarioAnual).toFixed(2)}`
+        template.querySelector('#ttr').textContent = `Total Retenciones: RD$${calcularTotalRet().toFixed(2)}`
+        template.querySelector('#snm').textContent = `Salario Neto Mensual: RD$${calcularSNetoMensual(Number(inputCalcular.value)).toFixed(2)}`
+        template.querySelector('#snq').textContent = `Salario Neto Quincenal: RD$${calcularSNetoQuincenal(Number(inputCalcular.value)).toFixed(2)}`
+   } else {
+      alert(`Debe Ingresar un valor numerico distinto a "${inputCalcular.value}" y debe ser mayor a 0!`)
+      inputCalcular = ''
+      inputCalcular.focus()
+   }
+   
     const clone = template.cloneNode(true)
     fragment.appendChild(clone)
 
     divTemplate.appendChild(fragment)
     btnCalcular.disabled = true
+    
     e.preventDefault()
-   
 })
 
 

@@ -22,13 +22,42 @@
            --> 
             <div class="input-group mb-3">
                 <span class="input-group-text">$</span>
-                 <input type="number" id="salario" class="form-control inpunt-salario" placeholder="Ingrese salario mensual" aria-label="Amount (to the nearest dollar)">
+                 <input type="text" id="salario" class="form-control inpunt-salario" placeholder="Ingrese salario mensual" aria-label="Amount (to the nearest dollar)">
               </div>
             <button type="submit" id="btn-calcular" class="btn btn-success">Calcular</button>
             <button type="submit" id="btn-borrar" class="btn btn-warning">Borrar</button>
         </form>
     </dir>
     <div id="template-div" class="calculos">
+    </div>
+    <div class="explicaciones">
+        <h2>Datos a tener en cuenta</h2>
+        <p>Al momento de crear esta app el salario mínimo cotizable era de RD$16,262.50.</p> 
+        <p>
+            El monto a pagar de Seguro Familiar de Salud (SFS) es quivalente al 3.04% del salario mensual del empleado. 
+            Su máximo está limitado a RD$4,742.40.
+        </p>
+        <p>
+            El monto a pagar de Administradora de Fondo de Pensiones (AFP) es equivalente al 2.87% del salario mensual del empleado. 
+            Su máximo está limitado a RD$8,954.40.
+        </p> 
+        <p>
+            Solo aplican para Impuesto Sobre la Renta (ISR) aquellos empleados cuyo sueldo mensual, después de haber restado SFS y AFP, 
+            sea de más de $34,685.00 pesos. Más información sobre el ISR: <a href="https://dgii.gov.do/cicloContribuyente/obligacionesTributarias/principalesImpuestos/Paginas/impuestoSobreRenta.aspx">Impuesto Sobre Renta</a>
+        </p>
+        <p>
+            Luego de restar las retenciones mencionadas anteriormente (SFS, AFP e ISR), el salario neto es la cantidad que debe pagar el empleador al empleado. 
+            En el caso de un pago quincenal, solo debe dividirse esta cantidad entre dos para saber el monto correspondiente a cada quincena. 
+            Tener en cuenta que algunas empresas descuentan todas las retenciones en una sola de las dos quincenas.
+        </p>
+    </div>
+
+
+    <div class="footer">
+        <p>
+            Este sitio no está avalado por ninguna entidad bancaria o gubernamental y fue desarrollado como una practica para reforzar los conocimientos en desarrollo Web. 
+            Los datos mostrados son producto del conocimiento del creador del sitio y están sujetos a cambios a través del tiempo según lo establezca la ley dominicana.
+        </p>
     </div>
 
     <template id="template-calculo">       
